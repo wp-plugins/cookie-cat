@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Assist compliance with UK cookie law/EU cookie directive by listing the cookies your website uses using the [cookies] shortcode. depends on oik.
 
 
-== Description ==
-In April 2012 the International Chamber of Commerce (ICC) UK issued the ICC UK cookie guide. 
-This is a 15-page / 296KB PDF report. 
+== Description ==    
+Use the [cookies] shortcode to produce a table of all the cookies your WordPress site uses; showing cookie name, category, description and duration.
+In April 2012 the International Chamber of Commerce (ICC) UK issued the ICC UK cookie guide ( a 15-page / 296KB PDF report ).
 The guidance, which has been welcomed by the Information Commissioner's Office (ICO), contains information on the different categories of cookies that website operators use.
 The ICC UK cookie guide suggests some standard wording to include in your website's Privacy policy.
 
