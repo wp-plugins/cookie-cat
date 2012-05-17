@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><feed><title   type="text">Cookie-cat for plugins 0515</title>
+<cc_mapping><plugin-name>wordpress</plugin-name>
+<cookies><cookie-name   _cc_mapping_cookie="4123">wordpress_</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4120">wordpress_logged_in_</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4121">wordpress_test_</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4122">wordpress_test_cookie</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4139">wp-settings-</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4124">wp-settings-time-</cookie-name>
+</cookies></cc_mapping><cc_mapping><plugin-name>PHP</plugin-name>
+<cookies><cookie-name   _cc_mapping_cookie="4125">PHPSESSID</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4126">SESS</cookie-name>
+</cookies></cc_mapping><cc_mapping><plugin-name>googleanalytics</plugin-name>
+<cookies><cookie-name   _cc_mapping_cookie="4106">__utma</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4107">__utmb</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4108">__utmc</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4109">__utmz</cookie-name>
+</cookies></cc_mapping><cc_mapping><plugin-name>cookiecontrol</plugin-name>
+<cookies><cookie-name   _cc_mapping_cookie="4143">civicAllowCookies</cookie-name>
+</cookies><cookies><cookie-name   _cc_mapping_cookie="4142">civicShowCookieIcon</cookie-name>
+</cookies></cc_mapping><cookies><cookie><name   id="4123">wordpress_</name>
+<description   type="html">WordPress cookie for a logged in user.</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4120">wordpress_logged_in_</name>
+<description   type="html">WordPress cookie for a logged in user</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4121">wordpress_test_</name>
+<description   type="html">WordPress cookie for a logged in user</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4122">wordpress_test_cookie</name>
+<description   type="html">WordPress test cookie</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4139">wp-settings-</name>
+<description   type="html">Wordpress also sets a few wp-settings-[UID] cookies.
+The number on the end is your individual user ID from the users database table. 
+This is used to customize your view of admin interface, and possibly also the main site interface. 
+</description>
+<_cookie_category>1</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>1 year</_cookie_category_duration>
+</cookie><cookie><name   id="4124">wp-settings-time-</name>
+<description   type="html">Wordpress also sets a few wp-settings-{time}-[UID] cookies. The number on the end is your individual user ID from the users database table. This is used to customize your view of admin interface, and possibly also the main site interface.
+</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>1 year</_cookie_category_duration>
+</cookie><cookie><name   id="4125">PHPSESSID</name>
+<description   type="html">To identify your unique session on the website</description>
+<_cookie_category>1</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4126">SESS</name>
+<description   type="html">To ensure that you are recognised when you move from page to page within the site and that any information you have entered is remembered.</description>
+<_cookie_category>1</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4106">__utma</name>
+<description   type="html">This cookie keeps track of the number of times a visitor has been to the site pertaining to the cookie, when their first visit was, and when their last visit occurred. Google Analytics uses the information from this cookie to calculate things like Days and Visits to purchase.</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>permanent</_cookie_category_duration>
+</cookie><cookie><name   id="4107">__utmb</name>
+<description   type="html">__utmb is a Google Analytics cookie. It takes a timestamp of the exact moment in time when a visitor enters a site.</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>on</_cookie_category_sess>
+<_cookie_category_duration></_cookie_category_duration>
+</cookie><cookie><name   id="4108">__utmc</name>
+<description   type="html">__utmc takes a timestamp of the exact moment in time when a visitor leaves a site.</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>30 mins</_cookie_category_duration>
+</cookie><cookie><name   id="4109">__utmz</name>
+<description   type="html">Keeps track of where the visitor came from, what search engine you used, what link you clicked on, what keyword you used, and where they were in the world when you accessed a website. This cookie is how Google Analytics knows to whom and to what source / medium / keyword to assign the credit for a Goal Conversion or an Ecommerce Transaction. 
+</description>
+<_cookie_category>2</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>6 months</_cookie_category_duration>
+</cookie><cookie><name   id="4143">civicAllowCookies</name>
+<description   type="html">Cookie Control user interface to remember your preference</description>
+<_cookie_category>1</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>90- days</_cookie_category_duration>
+</cookie><cookie><name   id="4142">civicShowCookieIcon</name>
+<description   type="html">Cookie Control user interface to remember your preference</description>
+<_cookie_category>1</_cookie_category>
+<_cookie_category_sess>0</_cookie_category_sess>
+<_cookie_category_duration>90 days</_cookie_category_duration>
+</cookie></cookies></feed>
