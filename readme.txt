@@ -28,6 +28,10 @@ There are other plugins to help you do that.
 == Installation ==
 1. Upload the contents of the cookie-cat plugin to the `/wp-content/plugins/cookie-cat' directory
 1. Activate the cookie-cat plugin through the 'Plugins' menu in WordPress
+1. Visit oik options > cookie cat page and perform the following steps
+1. Click on the Load XML button. A temporary XML file will be loaded for your active plugins
+1. Check the 'Use temp XML file?' checkbox and click on Redisplay. The cookie catalog may change. If there are "unknown" see the FAQ
+1. Click on the Save XML button to update the Latest XML file to the Latest loaded. 
 1. Edit your Privacy policy page to include the [cookies] shortcode
 
 Note: cookie-cat is dependent upon the oik plugin. You can activate it but it will not work unless oik is also activated.
@@ -56,7 +60,7 @@ Here's a simple list.
 
 1. Strictly necessary cookies - these cookies enable services you have specifically asked for
 2. Performance cookies - these cookies collect anonymous information on the pages visited
-3. Functionality cookies - these cookies remember choices you make to remember your experience
+3. Functionality cookies - these cookies remember choices you make to improve your experience
 4. Targeting cookies or advertising cookies - these cookies collect information about your browsing habits in order to make advertising relevant to you and your interests.
 
 For more information see [cookie-cat](http://www.cookie-cat.co.uk) or read the ICC UK Cookie guide
@@ -77,11 +81,12 @@ There are several ways to address this problem.
 3. Remove the unknown items from the table.
 4. Find out what the unknown cookies are; then update the output with the correct information.
 5. Stop using the plugin/theme or service that delivers the "unknown" cookie
+6. Let cookie-cat know you have an "unknown" cookie, wait for an update and retry.
 6. Raise an issue if there is a bug in the code.
 
 = How do I add a caveat? =
 First you need a Privacy policy page. 
-If you haved use the [oik-privacy-policy](http://www.wordpress.org/extend/plugins/oik-privacy-policy) plugin to help generate your Privacy policy page then you can write the caveat in the section that starts *"A list of all the cookies used in this website by category is set out below".*
+If you have used the [oik-privacy-policy](http://www.wordpress.org/extend/plugins/oik-privacy-policy) plugin to help generate your Privacy policy page then you can write the caveat in the section that starts *"A list of all the cookies used in this website by category is set out below".*
 
 = How do I remove the items from the table =
 
@@ -105,11 +110,12 @@ Paste this into your Privacy policy page.
 You may then wish to de-activate the cookie-cat plugin until you next change the installed plugins. 
 
 = How do I change the XML file? =
-Currently you have to edit the file ( `xml/cc_mapping.xml` ) which you will find in the plugin's XML directory. 
+From version 1.1 the XML file can be loaded directly from the cookie-cat website.
+Use oik options > cookie cat and follow the instructions in the Installation section
 
 = What is the source of the XML file's data =
 This comes from a website called [cookie-cat](http://www.cookie-cat.co.uk). 
-The XML file is generated from the data held in the website.
+The XML file delivered with the plugin is generated from the data held in the website.
 Every so often it is regenerated, producing information about the known cookies used by known plugins.
 Whenever the plugin is updated then a new version of this file will be delivered.
 
@@ -127,7 +133,8 @@ Yes. Use [cookies browser=Y]
 `[cookies
 browser="N|Y - show browser cookies"
 cookies="|cookie1,cookie2 - Optional list of cookie names."
-plugins="|plugin1,plugin2 - Optional list of plugin names. Defaults to ALL active plugins"]`
+plugins="|plugin1,plugin2 - Optional list of plugin names. Defaults to ALL active plugins"
+temp="N|Y - Use the temporary cc_mapping XML file"]`
 
 = Where can I find out more? = 
 If you are in the UK you should see the [ICC UK Cookie Guide](http://www.international-chamber.co.uk/components/com_wordpress/wp/wp-content/uploads/2012/04/icc_uk_cookie_guide.pdf)
@@ -135,13 +142,30 @@ If you are in the UK you should see the [ICC UK Cookie Guide](http://www.interna
 Also have a look at the links on the [cookie-cat](http://www.cookie-cat.co.uk) website.
 
 == Screenshots ==
-1. sample output viewed on "oik options > Shortcode help"  
-2. selected cookies (__utmz) and selected plugins (cookie-control)
+1. cookie-cat options section
+2. XML feed section: showing the XML files being used
+3. Cookie catalog - the "current" output from the [cookie] shortcode
+4. Example showing selected cookies and plugins
+5. cookie-cat.co.uk Mapping page - the source of the data
 
 == Upgrade Notice ==
-= 1.0 = Requires oik version 1.13 or higher
+= 1.1 =
+Now loads the XML directly from cookie-cat.co.uk
+
+= 1.0 = 
+Requires oik version 1.13 or higher
 
 == Changelog ==
+= 1.1 = 
+* Added: admin interface to load a new customised XML file from cookie-cat.co.uk
+* Added: will now produce links to prompt installation, upgrade or activation of oik
+* Added: temp=N|Y parameter for the [cookies] shortcode to advanced users to play with the "Extras" field
+* Added: option field to set browser=Y by default
+* Added: Extras field for adding special codes for plugins which aren't really active. Defaults to ",wordpress,PHP"
+* Changed: cc_mapping.xml file updated to reflect latest mapping in cookie-cat.co.uk
+* Changed: readme.txt file contains basic instructions for updating the XML mapping file. New screenshots.
+* Changed: Minor changes to tracing
+
 = 1.0 =
 * initial version. Works with oik version 1.13 
 
@@ -155,6 +179,6 @@ If you want to read more about the oik plugins then please visit the
 This version of the plugin is provided free of charge to the WordPress community.
 Its purpose is to help with the creation of your cookie catalog. 
 We accept no responsibility for ensuring the correctness of the information displayed.
-Don't have a go at us if your cookies are not listed. 
+Don't have a go at us if your cookies are not listed or are "unknown".
 
 

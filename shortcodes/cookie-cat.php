@@ -1,6 +1,92 @@
 <?php // (C) Copyright Bobbing Wide 2012 
 
 /**
+ * Set the location of the temporary XML file, in the upload directory folder
+ */
+function cookie_cat_default_temp_xml() {
+  $upload_dir = wp_upload_dir();
+  $basedir = bw_array_get( $upload_dir, "basedir", null );
+  $file = $basedir . '/' . "temp_mapping.xml";
+  return( $file );
+}
+
+
+/**
+ * Set the location of the cc_mapping.xml file delivered as part of the plugin
+ */
+function cookie_cat_default_xml() {
+  return( oik_path( "xml/cc_mapping.xml", "cookie-cat" ) );
+}
+
+/**
+ * Set the location of the "saved" cc_mapping XML file
+ */
+function cookie_cat_default_saved_xml() {
+  $upload_dir = wp_upload_dir();
+  $basedir = bw_array_get( $upload_dir, "basedir", null );
+  $file = $basedir . '/' . "cc_mapping.xml";
+  return( $file );
+}
+
+/**
+ * Build the default URL for the feed request
+ * Note: the first plugin is "wordpress"
+ */
+function cookie_cat_default_url() {
+  return( "http://www.cookie-cat.co.uk/feed/cc_mapping?plugins=" );
+}
+
+
+/**
+ * Set the extra values for the dummy plugins: wordpress, PHP 
+ * Note: The extras option is used by the shortcode. 
+ * The plugins option is used for the feed, but not for the shortcode.
+ * The preceeding comma is required. **?** Need to code a more robust solution.
+ */
+function cookie_cat_default_extras() {
+  return( ",wordpress,PHP" );
+}
+
+/**
+ * Return a comma separated list of active plugin names ( without directory or .php)
+ *
+ * bw_get_active_plugins is a new API for oik v1.14
+ */
+function cookie_cat_plugins() {
+  oik_require( "admin/oik-depends.inc" );
+  if ( !function_exists( "bw_get_active_plugins" ) ) {
+    $plugins = cc_get_active_plugins();
+  } else {
+    $plugins = bw_get_active_plugins();
+  }  
+  $plugin_keys = array_keys( $plugins );
+  $pluginlist = implode( ",", $plugin_keys );
+  return( $pluginlist );
+} 
+
+/**
+ * Default to not reporting browser cookies
+ */
+function cookie_cat_default_browser() {
+  return( "n" );
+}  
+
+/** 
+ * Set the cookie cat default option fields using callback functions
+ */
+function cookie_cat_default_options() {
+  $defaults = array( "url" => cookie_cat_default_url()
+                   , "plugins" => cookie_cat_plugins()
+                   , "extras" => cookie_cat_default_extras()
+                   , "browser" => cookie_cat_default_browser()
+                   );
+  //update_option( 
+                   
+  add_option( "cookie_cat_options", $defaults, null, "no" );
+  return( $defaults );                 
+}
+
+/**
  * Display the cookie rows
  * @param array $cookies - array of the cookies, indexed by name
  */
@@ -60,19 +146,30 @@ function cookie_cat_table( $cookies ) {
   etag( "table" );
 }
 
-
 /**
  * Load the cookie-cat mapping of plugins to cookies
  */
-function cookie_cat_info_defaults( $xmlfile="xml/cc_mapping.xml" ) {
-  //oik_path( $include_file, $plugin )
-  $request_url = oik_path( $xmlfile, "cookie-cat" );
-  
-  $response_xml = simplexml_load_file( $request_url );
-  bw_trace2( $response_xml );
+function cookie_cat_info_defaults( $options, $temp=false ) {
+  if ( $temp ) {   
+    $xmlfile = cookie_cat_default_temp_xml();
+  } else { 
+    $xmlfile = cookie_cat_default_saved_xml();
+  }
+   
+  if ( !file_exists( $xmlfile ) ) { 
+    
+    $xmlfile = cookie_cat_default_xml();
+  } 
+  bw_trace2( $xmlfile, "xmlfile", false ); 
+  // $request_url = oik_path( $xmlfile, "cookie-cat" );
+  $response_xml = simplexml_load_file( $xmlfile );
+  bw_trace2( $response_xml, "response_xml", false );
   return( $response_xml );
 }
 
+/**
+ * Return an array of cookies
+ */
 function cookie_cat_as_array( $cookies ) {
   $cookie_cat = array(); 
   foreach ( $cookies->cookie as $key => $cookie ) {
@@ -96,16 +193,21 @@ function cookie_cat_as_array( $cookies ) {
 function cookie_cat( $atts=null ) {
   // oik_require( "shortcodes/oik-cookie-list-defaults.inc", "oik-cookie-list" );
   
-
-  $cookie_info_defaults = cookie_cat_info_defaults();
+  $options = get_option( "cookie_cat_options" );
+  if ( $options === FALSE )
+    $options = cookie_cat_default_options();
+    
+  $temp = bw_array_get( $atts, "temp", "N" );
+  $temp = bw_validate_torf( $temp );
+  $cookie_info_defaults = cookie_cat_info_defaults( $options, $temp );
   
   $cookie_list = bw_array_get( $atts, "cookies", null ); 
   $plugin_list = bw_array_get( $atts, "plugins", null );
-  $browser_cookies = bw_array_get( $atts, "browser", "N" );
-  
-  //if ( $cookie_list ) {
-    $cookie_list = cookie_cat_defaults( $cookie_info_defaults,  bw_validate_torf( $browser_cookies ), $cookie_list, $plugin_list );
-  //}
+  $browser_cookies = bw_array_get( $atts, "browser", null );
+  if ( !$browser_cookies ) { 
+    $browser_cookies = bw_array_get_dcb( $options, "browser", null, "cookie_cat_default_browser" );
+  }
+  $cookie_list = cookie_cat_defaults( $cookie_info_defaults, bw_validate_torf( $browser_cookies ), $cookie_list, $plugin_list );
   bw_trace2( $cookie_list );
   $cookie_names = explode( "," , $cookie_list );
   
@@ -312,16 +414,16 @@ function oik_default_plugin_cookies( $cookie_info_defaults ) {
     if ( $sxmlo->cookies ) {
       $cookies = array();
       foreach ( $sxmlo->cookies as $sxmlco ) { 
-        bw_trace2( $sxmlco );
+        bw_trace2( $sxmlco, "sxmlco", false );
         $cookies[] = bw_array_get( $sxmlco, 'cookie-name', null );
       }
       // $plugin_name = bw_array_get( $sxmlo, 'plugin-name', null );
       $plugin_name = (string) $sxmlo->{'plugin-name'};
-      bw_trace2( $plugin_name, "plugin_name" );
+      bw_trace2( $plugin_name, "plugin_name", false );
       $plugin_cookies[$plugin_name] = implode( ",", $cookies );
     }
   }
-  bw_trace2( $plugin_cookies );
+  bw_trace2( $plugin_cookies, "plugin_cookies", false );
   
   
   return( $plugin_cookies ); 
@@ -330,7 +432,7 @@ function oik_default_plugin_cookies( $cookie_info_defaults ) {
 /**
  * Return an array of ALL active plugins - for single or multisite 
  * @return associative array
- * **?** HACK for bw_get_active_plugins()
+ * **?** HACK for bw_get_active_plugins() which is coming in oik v1.14
  * 
  */
 function cc_get_active_plugins() {
@@ -359,9 +461,9 @@ function oik_active_plugin_cookies( $cookie_info_defaults, $plugin_list ) {
   if ( $plugin_list ) {
     $plugins = explode( ",", $plugin_list );
   } else {    
-    // Do we need these one's? 
-    // $plugins['PHP'] = 'PHP';
-    $plugins['wordpress'] = 'wordpress';
+    $extras = bw_get_option( "extras", "cookie_cat_options" );
+    bw_trace2( $extras, "extras", false );
+    $plugins = explode( ",", $extras );
     $plugins = array_merge( $plugins, cc_get_active_plugins() );
   }
   
@@ -398,11 +500,11 @@ function oik_lazy_cookie_filter( $cookie_list ) {
   return( $cookie_list );
 }
 
-
 function cookies__syntax( $shortcode="cookies" ) {
   $syntax = array( "browser" => bw_skv( "N", "Y", "show browser cookies" )
                  , "cookies" => bw_skv( "", "<i>cookie1,cookie2</i>", "Optional list of cookie names." ) 
                  , "plugins" => bw_skv( "", "<i>plugin1,plugin2</i>", "Optional list of plugin names. Defaults to ALL active plugins" )
+                 , "temp" => bw_skv( "N", "Y", "Use the temporary cc_mapping XML file" )
                  );
   return( $syntax );   
 }
