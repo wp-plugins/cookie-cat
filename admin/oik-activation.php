@@ -93,13 +93,14 @@ function oik_plugin_update_plugin( $plugin ) {
  */
 function oik_plugin_check_installed_plugin( $plugin ) { 
   $plugin_to_activate = null;
-  $needle = "$plugin.php"; 
+  $needle = "/$plugin.php"; 
   
   $plugins = get_plugins();
   //bw_trace2( $plugins ); 
   if ( count( $plugins )) {
     foreach ( $plugins as $plugin_name => $plugin_details ) {
       if ( strpos( $plugin_name, $needle ) ) {
+        //bw_trace2( $plugin_name, $needle );
         $plugin_to_activate['Name'] = $plugin_details['Name'];
         $plugin_to_activate['file'] = $plugin_name;
         break;

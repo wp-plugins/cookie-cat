@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2012
+<?php // (C) Copyright Bobbing Wide 2012, 2013
 /**
  * Display a message when cookie-cat is not functional due to the dependencies not being activated or installed
  * Note: We can't use oik APIs here as we don't know if it's activated.
@@ -44,6 +44,7 @@ function cookie_cat_options_do_page() {
   oik_require( "shortcodes/cookie-cat.php", "cookie-cat" );
   oik_menu_header( "Cookie-cat options" );
   oik_box( NULL, NULL, "Options", "cookie_cat_options" );
+  oik_box( null, null, "Warning", "cookie_cat_warning_message" );
   oik_box( null, null, "Feed", "cookie_cat_feed" );
   oik_box( NULL, NULL, "Cookie catalog", "cookie_cat_catalog" );
   oik_menu_footer();
@@ -244,10 +245,21 @@ function cookie_cat_catalog() {
 }
 
 /**
+ * Produce message telling user that information will be passed to another server
+ */
+function cookie_cat_warning_message() {
+  p( "When you select the <b>Load XML</b> function, information from your website is passed to the cookie-cat server." );
+  p( "This includes the names of cookies which are currently set in your browser. Only the cookie names are passed, not the content." );
+  p( "This information may be used to help identify the mapping of cookies to plugins." );
+  p( "If you do not want this information to be passed then please don't use the function." );
+  alink( null, "http://cookie-cat.co.uk/cookie-cat-design-part-ia-cookie-cat-v1-1/", "Read about the cookie-cat design" );
+}  
+
+/**
  *  
  */
 function cookie_cat_feed() {
-  p( "Click on <b>Load XML</b> to load the cookie-cat XML from the server." );   
+  p( "Click on <b>Load XML</b> to load the cookie-cat XML from the server." ); 
   p( "Click on <b>Save XML</b> to save the new cookie-cat XML mapping file." );
   cookie_cat_load_temp_xml();
   cookie_cat_save_xml();
@@ -259,6 +271,8 @@ function cookie_cat_xml_form() {
   $load_xml = "<input type=\"submit\" name=\"_cookie_cat_load_xml\" value=\"Load XML\" class=\"button-primary\"/>";
   e( $load_xml );
   e( "&nbsp;" );
+  e( "By clicking on this button you authorize the passing of information to the cookie-cat server." );
+  br();
   $save_xml = "<input type=\"submit\" name=\"_cookie_cat_save_xml\" value=\"Save XML\" class=\"button-secondary\"/>";
   e ( $save_xml );
   etag( "form" );

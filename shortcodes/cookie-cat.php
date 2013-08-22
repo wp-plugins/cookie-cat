@@ -141,7 +141,9 @@ function cookie_cat_table( $cookies ) {
   bw_trace2();
   oik_require( "bobbforms.inc" ); 
   stag( "table", "cookies wide-fat" );
+  stag( "thead" );
   bw_tablerow( array( "Cookie Name", "Cookie Category", "Description", "Duration" ) );
+  etag( "thead" );
   cookie_cat_rows( $cookies );
   etag( "table" );
 }

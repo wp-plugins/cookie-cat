@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: http://www.oik-plugins.com/oik/oik-donate/
 Tags: cookie, categories, catalog, oik, EU cookie directive, UK cookie law, audit
 Requires at least: 3.0.4
-Tested up to: 3.4
-Stable tag: trunk
+Tested up to: 3.6
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,9 @@ You may then wish to de-activate the cookie-cat plugin until you next change the
 = How do I change the XML file? =
 From version 1.1 the XML file can be loaded directly from the cookie-cat website.
 Use oik options > cookie cat and follow the instructions in the Installation section
+Note that using the Load XML function passes the names of currently active cookies to the cookie-cat server.
+By using the function you authorize cookie-cat to the information that is passed.
+
 
 = What is the source of the XML file's data =
 This comes from a website called [cookie-cat](http://www.cookie-cat.co.uk). 
@@ -147,8 +150,12 @@ Also have a look at the links on the [cookie-cat](http://www.cookie-cat.co.uk) w
 3. Cookie catalog - the "current" output from the [cookie] shortcode
 4. Example showing selected cookies and plugins
 5. cookie-cat.co.uk Mapping page - the source of the data
+6. cookie cat Warning that data is passed to the cookie-cat server
 
 == Upgrade Notice ==
+= 1.2 =
+Changes to satisfy WordPress plugin review 
+
 = 1.1 =
 Now loads the XML directly from cookie-cat.co.uk
 
@@ -156,6 +163,11 @@ Now loads the XML directly from cookie-cat.co.uk
 Requires oik version 1.13 or higher
 
 == Changelog ==
+= 1.2 = 
+* Added: Warning messages about information that is passed to the cookie-cat server when using "Load XML"
+* Tested: Works with WordPress 3.6
+* Added: Added table heading tags for the cookie-cat table.
+
 = 1.1 = 
 * Added: admin interface to load a new customised XML file from cookie-cat.co.uk
 * Added: will now produce links to prompt installation, upgrade or activation of oik
@@ -167,7 +179,7 @@ Requires oik version 1.13 or higher
 * Changed: Minor changes to tracing
 
 = 1.0 =
-* initial version. Works with oik version 1.13 
+* initial version. Works with oik version 1.13
 
 == Further reading ==
 If you want to read more about the oik plugins then please visit the
