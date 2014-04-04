@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2012
+<?php // (C) Copyright Bobbing Wide 2012, 2014
 
 if ( function_exists( "oik_plugin_lazy_activation" ) ) {
  // It's already defined so we don't need this lot
@@ -70,26 +70,6 @@ function oik_plugin_update_plugin( $plugin ) {
  * Find out if we think the plugin is installed but not activated or not even installed
  * @param string $plugin - the plugin file name ( without plugin path info? )
  * @return string - null if it's not installed or plugin to be activated
- C:\apache\htdocs\wordpress\wp-content\plugins\oik\shortcodes\oik-bob-bing-wide.php(289:0) 2012-05-23T07:52:15+00:00 696 cf=the_content bw_get_plugins(4)  Array
-(
-
-    [oik/oik.php] => Array
-        (
-            [Name] => oik base plugin
-            [PluginURI] => http://www.oik-plugins.com/oik
-            [Version] => 1.13
-            [Description] => Lazy smart shortcodes for displaying often included key-information and other WordPress content
-            [Author] => bobbingwide
-            [AuthorURI] => http://www.bobbingwide.com
-            [TextDomain] => 
-            [DomainPath] => 
-            [Network] => 
-            [Title] => oik base plugin
-            [AuthorName] => bobbingwide
-        )
-
-)
-
  */
 function oik_plugin_check_installed_plugin( $plugin ) { 
   $plugin_to_activate = null;
@@ -109,7 +89,6 @@ function oik_plugin_check_installed_plugin( $plugin ) {
   }
   return( $plugin_to_activate );
 }
-
 
 /**
  * This won't work for Multisite since it doesn't find the network activated plugins

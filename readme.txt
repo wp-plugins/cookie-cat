@@ -2,8 +2,8 @@
 Contributors: bobbingwide
 Donate link: http://www.oik-plugins.com/oik/oik-donate/
 Tags: cookie, categories, catalog, oik, EU cookie directive, UK cookie law, audit
-Requires at least: 3.0.4
-Tested up to: 3.6
+Requires at least: 3.5
+Tested up to: 3.9-beta3
 Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,6 +24,10 @@ By default the list is dynamically generated taking into account the active plug
          
 This plugin *does not* implement anything to help you obtain the user's consent to place a cookie on their device.
 There are other plugins to help you do that. 
+
+Use in conjunction with [oik-privacy-policy](http://wordpress.org/plugins/oik-privacy-policy/)
+
+http://youtu.be/8i-sm6TS28M
 
 == Installation ==
 1. Upload the contents of the cookie-cat plugin to the `/wp-content/plugins/cookie-cat' directory
@@ -153,6 +157,9 @@ Also have a look at the links on the [cookie-cat](http://www.cookie-cat.co.uk) w
 6. cookie cat Warning that data is passed to the cookie-cat server
 
 == Upgrade Notice ==
+= 1.3 =
+Tested with WordPress 3.9
+
 = 1.2 =
 Changes to satisfy WordPress plugin review. Works with oik version 1.13 and above 
 
@@ -163,6 +170,10 @@ Now loads the XML directly from cookie-cat.co.uk
 Requires oik version 1.13 or higher
 
 == Changelog ==
+= 1.3 = 
+* Changed: Slight restructuring for improved documentation
+* Changed: Now dependent upon oik v2.1 or higher
+
 = 1.2 = 
 * Added: Warning messages about information that is passed to the cookie-cat server when using "Load XML"
 * Tested: Works with WordPress 3.6
