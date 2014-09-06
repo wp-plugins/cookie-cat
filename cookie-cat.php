@@ -4,9 +4,9 @@ Plugin Name: cookie-cat
 Depends: oik base plugin
 Plugin URI: http://www.oik-plugins.com/oik-plugins/cookie-cat
 Description: [cookies] shortcode for producing a table of cookies the website uses
-Version: 1.3
+Version: 1.4
 Author: bobbingwide
-Author URI: http://www.bobbingwide.com
+Author URI: http://www.oik-plugins.com/author/bobbingwide
 License: GPL2
 
     Copyright 2012-2014 Bobbing Wide (email : herb@bobbingwide.com )
@@ -29,11 +29,20 @@ License: GPL2
 
 /**
  * Implement "oik_loaded" action for cookie-cat
+ *
+ * Note: We define the "cookies" filter here even though it's only invoked by cookie-cat
+ * during the expansion of the [cookies] shortcode. 
  */
 function cookie_cat_init() {
-  bw_add_shortcode( 'cookies', 'cookie_cat',  oik_path( "shortcodes/cookie-cat.php", "cookie-cat"), false ); 
   add_filter( "cookies", "oik_cookie_filter", 11, 2 );
   add_action( "oik_admin_menu", "cookie_cat_admin_menu" );
+}
+
+/**
+ * Implement "oik_add_shortcodes" action for cookie-cat
+ */
+function cookie_cat_oik_add_shortcodes() {
+  bw_add_shortcode( 'cookies', 'cookie_cat',  oik_path( "shortcodes/cookie-cat.php", "cookie-cat"), false ); 
 }
 
 /*
@@ -47,13 +56,15 @@ function cookie_cat_activation() {
   static $plugin_basename = null;
   if ( !$plugin_basename ) {
     $plugin_basename = plugin_basename(__FILE__);
-    add_action( "after_plugin_row_cookie-cat/cookie-cat.php" , "cookie_cat_activation" );   
-    require_once( "admin/oik-activation.php" );
+    add_action( "after_plugin_row_cookie-cat/cookie-cat.php" , "cookie_cat_activation" ); 
+    if ( !function_exists( "oik_plugin_lazy_activation" ) ) { 
+      require_once( "admin/oik-activation.php" );
+    }  
   }  
   if ( is_multisite() ) { 
-    $depends = "oik:2.1"; 
+    $depends = "oik:2.2"; 
   } else {
-    $depends = "oik:2.1";
+    $depends = "oik:2.2";
   }     
   oik_plugin_lazy_activation( __FILE__, $depends, "oik_plugin_plugin_inactive" );
 }
@@ -68,6 +79,7 @@ function cookie_cat_admin_menu() {
 
 /**
  * Implement "cookies" filter for cookie-cat
+ *
  * @param string $cookie_list
  * @return string 
  */   
@@ -81,6 +93,7 @@ function oik_cookie_filter( $cookie_list ) {
  */
 function cookie_cat_loaded() {
   add_action( "oik_loaded", "cookie_cat_init" );
+  add_action( "oik_add_shortcodes", "cookie_cat_oik_add_shortcodes" );
   add_action( "admin_notices", "cookie_cat_activation" );
 }
 

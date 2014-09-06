@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2012 
+<?php // (C) Copyright Bobbing Wide 2012-2014 
 
 /**
  * Set the location of the temporary XML file, in the upload directory folder
@@ -30,6 +30,7 @@ function cookie_cat_default_saved_xml() {
 
 /**
  * Build the default URL for the feed request
+ * 
  * Note: the first plugin is "wordpress"
  */
 function cookie_cat_default_url() {
@@ -39,9 +40,12 @@ function cookie_cat_default_url() {
 
 /**
  * Set the extra values for the dummy plugins: wordpress, PHP 
+ * 
  * Note: The extras option is used by the shortcode. 
  * The plugins option is used for the feed, but not for the shortcode.
  * The preceeding comma is required. **?** Need to code a more robust solution.
+ *
+ * @return string - the extra values
  */
 function cookie_cat_default_extras() {
   return( ",wordpress,PHP" );
@@ -51,6 +55,8 @@ function cookie_cat_default_extras() {
  * Return a comma separated list of active plugin names ( without directory or .php)
  *
  * bw_get_active_plugins is a new API for oik v1.14
+ * 
+ * @return string - list of plugin slugs
  */
 function cookie_cat_plugins() {
   oik_require( "admin/oik-depends.inc" );
@@ -66,6 +72,8 @@ function cookie_cat_plugins() {
 
 /**
  * Default to not reporting browser cookies
+ * 
+ * @return string - "n"
  */
 function cookie_cat_default_browser() {
   return( "n" );
@@ -73,6 +81,8 @@ function cookie_cat_default_browser() {
 
 /** 
  * Set the cookie cat default option fields using callback functions
+ *
+ * @return array - defaults
  */
 function cookie_cat_default_options() {
   $defaults = array( "url" => cookie_cat_default_url()
@@ -88,6 +98,7 @@ function cookie_cat_default_options() {
 
 /**
  * Display the cookie rows
+ * 
  * @param array $cookies - array of the cookies, indexed by name
  */
 function cookie_cat_rows( $cookies ) {
@@ -186,7 +197,8 @@ function cookie_cat_as_array( $cookies ) {
 }
 
 /**
- * Implement the [cookies] shortcode 
+ * Implement the [cookies] shortcode
+ *  
  * @param array $atts attributes
  *   cookies="cookie list" - if not specified it builds a default list based on what's in $_COOKIE
  * and the active_plugins 
@@ -231,6 +243,7 @@ function cookie_cat( $atts=null ) {
 
 /** 
  * Define a cookie, category and callback for description
+ * 
  * @param string $cookie_cat - Category as defined by the ICC UK Cookie Guide
  * @param string $cookie_duration - expiration of the cookie
  * @param string $cookie_cb
@@ -261,7 +274,8 @@ function cookie_cat_simplify( $cookie_name, $preg_cookies="wordpress_logged_in" 
 }
 
 /**
- * return a string of cookies for cookie_cat_simplify 
+ * Return a string of cookies for cookie_cat_simplify 
+ * 
  * @param array $cookie_defaults - default information for common cookies
  * @param array $plugin_cookies - known cookies by plugin
  * @return string $preg_cookies - a '|' separated list of base cookie names
@@ -326,6 +340,10 @@ function cookie_cat_defaults( $cookie_info_defaults, $browser_cookies= false, $c
 
 /**
  * Return the cookies for a specific plugin ( or theme - **?**)
+ * 
+ * @param string $plugin - the plugin slug
+ * @param array $default_plugin_cookies - array of default plugin cookies
+ * @return array plugin cookies
  */
 function oik_query_plugin_cookies( $plugin, $default_plugin_cookies ) {
   bw_trace2();
@@ -426,13 +444,12 @@ function oik_default_plugin_cookies( $cookie_info_defaults ) {
     }
   }
   bw_trace2( $plugin_cookies, "plugin_cookies", false );
-  
-  
   return( $plugin_cookies ); 
 }
 
 /**
  * Return an array of ALL active plugins - for single or multisite 
+ * 
  * @return associative array
  * **?** HACK for bw_get_active_plugins() which is coming in oik v1.14
  * 
@@ -485,7 +502,8 @@ function oik_active_plugin_cookies( $cookie_info_defaults, $plugin_list ) {
 }
 
 /** 
- * oik's own implementation of the 'cookies' filter
+ *  'cookies' filter     oik's own implementation of the
+ * 
  * Doesn't do anything except trace the cookie_list 
  * Other plugins should add to the cookie list the cookies that it suppports
  *
@@ -495,6 +513,10 @@ function oik_active_plugin_cookies( $cookie_info_defaults, $plugin_list ) {
  *
  * where oik_norty_desc_cb() is the function that actually provides the description of this cookie
  * Note: You will need to load this function so that it can be run when the table is being generated.
+ *
+ * @param array $cookie_list
+ * @return array - the filtered cookie list
+ *
  *  
  */
 function oik_lazy_cookie_filter( $cookie_list ) {
